@@ -1014,7 +1014,11 @@ public class LinguaFrancaSynthesis extends AbstractDiagramSynthesis<Model> {
             try {
                 b.append(FileUtil.nameWithoutExtension(reactorInstance.reactorDeclaration.eResource()));
             } catch (Exception e) {
-                throw Exceptions.sneakyThrow(e);
+                if (!reactorInstance.reactorDeclaration.getName().isEmpty()) {
+                    b.append(reactorInstance.reactorDeclaration.getName());
+                } else {
+                    b.append("Main");
+                }
             }
         } else if (reactorInstance.reactorDeclaration == null) {
             // There is an error in the graph.

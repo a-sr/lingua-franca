@@ -198,11 +198,15 @@ public class LinguaFrancaSynthesis extends AbstractDiagramSynthesis<Model> {
     /** Synthesis actions */
     public static final DisplayedActionData COLLAPSE_ALL = DisplayedActionData.create(CollapseAllReactorsAction.ID, "Hide all Details");
     public static final DisplayedActionData EXPAND_ALL = DisplayedActionData.create(ExpandAllReactorsAction.ID, "Show all Details");
+
+    /** Export only */
+    public static final SynthesisOption INITIALLY_EXPAND_ALL = SynthesisOption.createCheckOption("org.lflang.diagram.expand.all", "Initially expand Reactors", false);
     
     @Override
     public List<SynthesisOption> getDisplayedSynthesisOptions() {
         return List.of(
             SHOW_ALL_REACTORS,
+            INITIALLY_EXPAND_ALL,
             MemorizingExpandCollapseAction.MEMORIZE_EXPANSION_STATES,
             CYCLE_DETECTION,
             ModeDiagrams.SHOW_TRANSITION_LABELS,
@@ -683,7 +687,7 @@ public class LinguaFrancaSynthesis extends AbstractDiagramSynthesis<Model> {
             Boolean expansionState = MemorizingExpandCollapseAction.getExpansionState(child);
             Collection<KNode> rNodes = createReactorNode(
                     child, 
-                    expansionState != null ? expansionState : false, 
+                    expansionState != null ? expansionState : getBooleanValue(INITIALLY_EXPAND_ALL), 
                     inputPorts, 
                     outputPorts, 
                     allReactorNodes);

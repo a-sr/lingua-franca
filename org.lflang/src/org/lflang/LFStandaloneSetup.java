@@ -5,11 +5,17 @@
 package org.lflang;
 
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.Modules2;
+import org.lflang.lf.Model;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+
+import de.cau.cs.kieler.core.services.KielerLanguage;
 
 /**
  * Initialization support for running Xtext languages without
@@ -17,7 +23,7 @@ import com.google.inject.Module;
  *
  * See {@link LFRuntimeModule}, the base Guice module for LF services.
  */
-public class LFStandaloneSetup extends LFStandaloneSetupGenerated {
+public class LFStandaloneSetup extends LFStandaloneSetupGenerated implements KielerLanguage {
 
 	private final Module module;
 
@@ -33,4 +39,37 @@ public class LFStandaloneSetup extends LFStandaloneSetupGenerated {
 	public Injector createInjector() {
 		return Guice.createInjector(this.module);
 	}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Injector getInjector() {
+        // FIXME Workaround for a bug in KiCoDia that loads the KlighdDataManager 
+        // before external classes were put on the classpath
+        var i = createInjectorAndDoEMFRegistration();
+        try {
+            var reg = i.getInstance(this.getClass().getClassLoader().loadClass("org.lflang.diagram.synthesis.SynthesisRegistration"));
+            reg.getClass().getMethod("execute").invoke(reg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Class<? extends EObject>> getSupportedModels() {
+        return List.of(Model.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getSupportedResourceExtensions() {
+        return List.of("lf");
+    }
 }

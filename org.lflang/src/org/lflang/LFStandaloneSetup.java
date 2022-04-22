@@ -45,16 +45,7 @@ public class LFStandaloneSetup extends LFStandaloneSetupGenerated implements Kie
      */
     @Override
     public Injector getInjector() {
-        // FIXME Workaround for a bug in KiCoDia that loads the KlighdDataManager 
-        // before external classes were put on the classpath
-        var i = createInjectorAndDoEMFRegistration();
-        try {
-            var reg = i.getInstance(this.getClass().getClassLoader().loadClass("org.lflang.diagram.synthesis.SynthesisRegistration"));
-            reg.getClass().getMethod("execute").invoke(reg);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return i;
+        return createInjectorAndDoEMFRegistration();
     }
 
     /**

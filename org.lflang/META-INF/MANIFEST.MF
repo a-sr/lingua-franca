@@ -3,7 +3,7 @@ Automatic-Module-Name: org.lflang
 Bundle-ManifestVersion: 2
 Bundle-Name: Lingua Franca Language Implementation
 Bundle-Vendor: University of California, Berkeley
-Bundle-Version: 0.2.0.qualifier
+Bundle-Version: 0.2.1.qualifier
 Bundle-SymbolicName: org.lflang; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
@@ -23,7 +23,7 @@ Require-Bundle: org.eclipse.xtext,
  com.fasterxml.jackson.core.jackson-databind,
  org.eclipse.core.runtime;bundle-version="3.23.0",
  de.cau.cs.kieler.core;bundle-version="1.3.0";visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.lflang,
  org.lflang.generator,
  org.lflang.graph,

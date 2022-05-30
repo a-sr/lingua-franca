@@ -219,6 +219,8 @@ public class LinguaFrancaSynthesis extends AbstractDiagramSynthesis<Model> {
             INITIALLY_EXPAND_ALL,
             MemorizingExpandCollapseAction.MEMORIZE_EXPANSION_STATES,
             CYCLE_DETECTION,
+            APPEARANCE,
+            ModeDiagrams.MODES_CATEGORY,
             ModeDiagrams.SHOW_TRANSITION_LABELS,
             ModeDiagrams.INITIALLY_COLLAPSE_MODES,
             SHOW_USER_LABELS,
@@ -1133,7 +1135,7 @@ public class LinguaFrancaSynthesis extends AbstractDiagramSynthesis<Model> {
         }
         if (!IterableExtensions.isNullOrEmpty(param.getInitialValue())) {
             b.append("(");
-            b.append(IterableExtensions.join(param.getInitialValue(), ", ", _utilityExtensions::toText));
+            b.append(IterableExtensions.join(param.getInitialValue(), ", ", ASTUtils::toText));
             b.append(")");
         }
         return b.toString();
@@ -1169,7 +1171,7 @@ public class LinguaFrancaSynthesis extends AbstractDiagramSynthesis<Model> {
         }
         if (!IterableExtensions.isNullOrEmpty(variable.getInit())) {
             b.append("(");
-            b.append(IterableExtensions.join(variable.getInit(), ", ", _utilityExtensions::toText));
+            b.append(IterableExtensions.join(variable.getInit(), ", ", ASTUtils::toText));
             b.append(")");
         }
         return b.toString();

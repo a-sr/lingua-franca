@@ -348,6 +348,10 @@
             name="com.fasterxml.jackson.core.jackson-databind"/>
         <requirement
             name="de.cau.cs.kieler.core"/>
+        <requirement
+            name="de.cau.cs.kieler.framework.feature.feature.group"/>
+        <requirement
+            name="de.cau.cs.kieler.sccharts.feature.feature.group"/>
         <repositoryList
             name="DefaultRepositories">
           <repository
@@ -368,6 +372,10 @@
               url="https://rtsys.informatik.uni-kiel.de/~kieler/updatesite/sprotty/0.9.0/"/>
           <repository
               url="http://rtsys.informatik.uni-kiel.de/~kieler/updatesite/nightly/semantics/"/>
+          <repository
+              url="https://rtsys.informatik.uni-kiel.de/~kieler/updatesite/release_pragmatics_2021-06/"/>
+          <repository
+              url="https://rtsys.informatik.uni-kiel.de/~kieler/updatesite/websocket-mirror/"/>
         </repositoryList>
       </targlet>
     </setupTask>

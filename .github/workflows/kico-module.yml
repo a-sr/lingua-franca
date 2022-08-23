@@ -1,0 +1,36 @@
+name: Build KiCo Module
+
+on:
+  workflow_call:
+    inputs:
+      nightly:
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      envPAT:
+        required: false
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out lingua-franca repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Prepare build environment
+        uses: ./.github/actions/prepare-build-env
+      - name: Check Maven/Java configuration
+        run: mvn -version
+        shell: bash
+      - name: Build KiCo Module
+        run: bash build_kico_module.sh
+        shell: bash
+      - name: KiCo Module Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: LF KiCo Module
+          path: kico-lf.jar
+          if-no-files-found: error

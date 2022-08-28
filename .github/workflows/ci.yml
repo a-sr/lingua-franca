@@ -22,5 +22,5 @@ jobs:
 
   # Build module.
   build:
-    uses: lf-lang/lingua-franca/.github/workflows/kico-module.yml@master
+    uses: a-sr/lingua-franca/.github/workflows/kico-module.yml@master
     needs: cancel
